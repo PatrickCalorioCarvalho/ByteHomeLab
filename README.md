@@ -39,58 +39,6 @@ Esse repositório permite:
 
 ---
 
-## 📁 Estrutura do Repositório
-
-```
-ByteHomeLab/
-├─ docker/
-│  └─ docker-compose.yml
-│
-├─ homeassistant/
-│  ├─ configuration.yaml
-│  ├─ automations.yaml
-│  ├─ scenes.yaml
-│  └─ secrets.yaml.example
-│
-├─ nodered/
-│  ├─ flows.json
-│  └─ README.md
-│
-├─ esphome/
-│  ├─ sala/
-│  │  └─ esp32_sala.yaml
-│  ├─ quarto1/
-│  └─ common/
-│     ├─ wifi.yaml
-│     └─ mqtt.yaml
-│
-├─ mqtt/
-│  └─ topics.md
-│
-├─ scripts/
-│  └─ backup_git.sh
-│
-├─ diagrams/
-│  └─ arquitetura.drawio
-│
-├─ .gitignore
-└─ README.md
-```
-
----
-
-## 🔐 Segurança
-
-Arquivos sensíveis **NÃO** devem ser versionados:
-
-* `secrets.yaml`
-* Tokens
-* Senhas MQTT
-
-Use arquivos `.example` como modelo.
-
----
-
 ## 🔁 Fluxo de Automação (Resumo)
 
 ```
@@ -122,18 +70,6 @@ Ver: `scripts/backup_git.sh`
 * Home Assistant para interface
 * ESP32 para interação física
 * Git como memória do sistema
-
----
-
-## 🏷️ Convenção de Commits
-
-```
-feat: nova automação ou dispositivo
-fix: correção de fluxo ou configuração
-chore: organização/infra
-refactor: melhoria sem mudar comportamento
-docs: documentação
-```
 
 ---
 
