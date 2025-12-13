@@ -1,0 +1,66 @@
+# ==================================================
+# ByteHomeLab - GitIgnore
+# ==================================================
+
+# --------------------------
+# Sistema
+# --------------------------
+.DS_Store
+*.swp
+*.tmp
+
+# --------------------------
+# Docker / Runtime geral
+# --------------------------
+**/data/
+**/log/
+**/*.db
+**/*.db-shm
+**/*.db-wal
+
+# --------------------------
+# Home Assistant
+# --------------------------
+homeassistant/.storage/
+homeassistant/.cloud/
+homeassistant/.google.token
+homeassistant/secrets.yaml
+homeassistant/known_devices.yaml
+homeassistant/home-assistant_v2.db*
+homeassistant/*.log*
+homeassistant/.ha_run.lock
+
+# --------------------------
+# Node-RED
+# --------------------------
+nodered/node_modules/
+nodered/.npm/
+nodered/context/
+nodered/flows_cred.json
+nodered/*.log
+nodered/.config.*
+
+# --------------------------
+# ESPHome
+# --------------------------
+esphome/.esphome/
+esphome/.storage/
+
+# --------------------------
+# Mosquitto
+# --------------------------
+mosquitto/data/
+mosquitto/log/
+mosquitto/*.pwd
+mosquitto/*.db
+
+# --------------------------
+# Portainer
+# --------------------------
+portainer/
+
+# --------------------------
+# Backup / Logs
+# --------------------------
+scripts/*.log
+
