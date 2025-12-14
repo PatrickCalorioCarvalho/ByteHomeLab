@@ -95,7 +95,7 @@ Este projeto roda em um **Raspberry Pi 3**, utilizando um *case customizado* des
 🔗 Referência do case:
 
 * Raspberry Pi 3 Custom Case (Open Source)
-* Repositório: PatrickCalorioCarvalho / CaseRaspberryPi
+* Repositório: [PatrickCalorioCarvalho / CaseRaspberryPi](https://github.com/PatrickCalorioCarvalho/CaseRaspberryPi)
 
 O uso de um case dedicado melhora:
 
