@@ -48,7 +48,7 @@ nodered/.config.*
 esphome/.esphome/
 esphome/.storage/
 esphome/archive/
-
+esphome/secrets.yaml
 # --------------------------
 # Mosquitto
 # --------------------------
