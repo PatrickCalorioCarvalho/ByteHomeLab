@@ -8,6 +8,7 @@
 .DS_Store
 *.swp
 *.tmp
+*.tar
 
 # --------------------------
 # Docker / Runtime geral
@@ -29,6 +30,7 @@ homeassistant/known_devices.yaml
 homeassistant/home-assistant_v2.db*
 homeassistant/*.log*
 homeassistant/.ha_run.lock
+homeassistant/backups/
 
 # --------------------------
 # Node-RED
