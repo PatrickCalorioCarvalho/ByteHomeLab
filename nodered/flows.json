@@ -495,7 +495,7 @@
         "type": "function",
         "z": "78cb223f5bddb963",
         "name": "MontarPayload",
-        "func": "if (!msg.payload) {\n    msg.statusCode = 404;\n    msg.payload = {\n        error: \"Dispositivo nao encontrado\"\n    };\n    return msg;\n}\n\nmsg.payload = {\n    id: msg.device_id,\n    value: parseFloat(msg.payload.state),\n    unit: msg.payload.attributes.unit_of_measurement || \"\"\n};\n\nreturn msg;\n",
+        "func": "if (!msg.payload) {\n    msg.statusCode = 404;\n    msg.payload = {\n        error: \"Dispositivo nao encontrado\"\n    };\n    return msg;\n}\n\nmsg.payload = {\n    id: msg.device_id,\n    value: parseInt(msg.payload.state),\n    unit: msg.payload.attributes.unit_of_measurement || \"\"\n};\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,

@@ -464,8 +464,8 @@
             {
                 "property": "payload",
                 "propertyType": "msg",
-                "value": "string",
-                "valueType": "entityState"
+                "value": "",
+                "valueType": "entity"
             },
             {
                 "property": "data",
@@ -482,8 +482,28 @@
         "override_payload": "msg",
         "entity_location": "data",
         "override_data": "msg",
-        "x": 420,
-        "y": 260,
+        "x": 280,
+        "y": 300,
+        "wires": [
+            [
+                "91868f6148f015ae"
+            ]
+        ]
+    },
+    {
+        "id": "91868f6148f015ae",
+        "type": "function",
+        "z": "78cb223f5bddb963",
+        "name": "MontarPayload",
+        "func": "if (!msg.payload) {\n    msg.statusCode = 404;\n    msg.payload = {\n        error: \"Dispositivo nao encontrado\"\n    };\n    return msg;\n}\n\nmsg.payload = {\n    id: msg.device_id,\n    value: parseFloat(msg.payload.state),\n    unit: msg.payload.attributes.unit_of_measurement || \"\"\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 300,
         "wires": [
             [
                 "96fa73b3f3e8ae28"
