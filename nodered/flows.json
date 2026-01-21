@@ -1,0 +1,513 @@
+[
+    {
+        "id": "3449d8f125bfc217",
+        "type": "tab",
+        "label": "ByteHomeLab - Areas",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "127e6c3c5def588c",
+        "type": "tab",
+        "label": "ByteHomeLab - Dispositivos",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "78cb223f5bddb963",
+        "type": "tab",
+        "label": "ByteHomeLab - Acao",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6beb2ca33f3f50e9",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 6,
+        "addon": false,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": [
+            "y",
+            "yes",
+            "true",
+            "on",
+            "home",
+            "open"
+        ],
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": 30,
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": ": ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "default",
+        "statusTimeFormat": "h:m",
+        "enableGlobalContextStore": false
+    },
+    {
+        "id": "675b9b6b71ecbafd",
+        "type": "http in",
+        "z": "3449d8f125bfc217",
+        "name": "",
+        "url": "PegarAreas",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "f5e9112ffca26969"
+            ]
+        ]
+    },
+    {
+        "id": "3fe58dc58b59c00d",
+        "type": "http response",
+        "z": "3449d8f125bfc217",
+        "name": "retorno",
+        "statusCode": "",
+        "headers": {},
+        "x": 840,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "7f41983f983da564",
+        "type": "ha-api",
+        "z": "3449d8f125bfc217",
+        "name": "PegarAreas",
+        "server": "6beb2ca33f3f50e9",
+        "version": 1,
+        "debugenabled": false,
+        "protocol": "websocket",
+        "method": "get",
+        "path": "",
+        "data": "msg.payload",
+        "dataType": "jsonata",
+        "responseType": "json",
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "results"
+            }
+        ],
+        "x": 530,
+        "y": 160,
+        "wires": [
+            [
+                "eb8b81bca92984ee"
+            ]
+        ]
+    },
+    {
+        "id": "eb8b81bca92984ee",
+        "type": "function",
+        "z": "3449d8f125bfc217",
+        "name": "Filtrar ID e Nome",
+        "func": "let areas = msg.payload;\n\nif (areas && Array.isArray(areas)) {\n    msg.payload = areas.map(a => ({\n        id: a.area_id,\n        name: a.name\n    }));\n} else {\n    msg.payload = [];\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 280,
+        "wires": [
+            [
+                "3fe58dc58b59c00d"
+            ]
+        ]
+    },
+    {
+        "id": "f5e9112ffca26969",
+        "type": "function",
+        "z": "3449d8f125bfc217",
+        "name": "MontarPayloadHA",
+        "func": "msg.payload = {\n    id: 1,\n    type: \"config/area_registry/list\"\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 160,
+        "wires": [
+            [
+                "7f41983f983da564"
+            ]
+        ]
+    },
+    {
+        "id": "36815d941cdaf293",
+        "type": "http in",
+        "z": "127e6c3c5def588c",
+        "name": "",
+        "url": "PegarDispositivos",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "9734f364a32164dc"
+            ]
+        ]
+    },
+    {
+        "id": "585a75f414f8f168",
+        "type": "http response",
+        "z": "127e6c3c5def588c",
+        "name": "retorno",
+        "statusCode": "",
+        "headers": {},
+        "x": 900,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "3b69fe0d9fce5280",
+        "type": "ha-api",
+        "z": "127e6c3c5def588c",
+        "name": "PegarDispositivos",
+        "server": "6beb2ca33f3f50e9",
+        "version": 1,
+        "debugenabled": false,
+        "protocol": "websocket",
+        "method": "get",
+        "path": "",
+        "data": "msg.payload",
+        "dataType": "jsonata",
+        "responseType": "json",
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "results"
+            }
+        ],
+        "x": 250,
+        "y": 280,
+        "wires": [
+            [
+                "8c96d2dc96d1b56a"
+            ]
+        ]
+    },
+    {
+        "id": "8c96d2dc96d1b56a",
+        "type": "function",
+        "z": "127e6c3c5def588c",
+        "name": "Filtrar AreaID",
+        "func": "const areaId = msg.req.query.area_id;\nconst devices = msg.payload;\n\nmsg.devices = devices\n  .filter(d => d.area_id === areaId)\n  .map(d => ({\n    device_id: d.id,\n    name: d.name_by_user || d.name\n  }));\n\nmsg.payload = {\n    id: 1,\n    type: \"config/entity_registry/list\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 280,
+        "wires": [
+            [
+                "36643cf62163248b"
+            ]
+        ]
+    },
+    {
+        "id": "9734f364a32164dc",
+        "type": "function",
+        "z": "127e6c3c5def588c",
+        "name": "MontarPayloadHA",
+        "func": "const area_id = msg.req.query.area_id;\n\nif (!area_id) {\n    msg.payload = [];\n    return msg;\n}\n\nmsg.payload = {\n    id: 1,\n    type: \"config/device_registry/list\"\n};\n\nmsg.area_id = area_id;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "11940f69bf8c3b8b"
+            ]
+        ]
+    },
+    {
+        "id": "11940f69bf8c3b8b",
+        "type": "switch",
+        "z": "127e6c3c5def588c",
+        "name": "ValidarAreas",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "empty"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 450,
+        "y": 180,
+        "wires": [
+            [
+                "79c1570ebd223cd8"
+            ],
+            [
+                "3b69fe0d9fce5280"
+            ]
+        ]
+    },
+    {
+        "id": "79c1570ebd223cd8",
+        "type": "template",
+        "z": "127e6c3c5def588c",
+        "name": "Erro",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"ERRO:\":\"informar Areas\"}",
+        "output": "json",
+        "x": 670,
+        "y": 180,
+        "wires": [
+            [
+                "585a75f414f8f168"
+            ]
+        ]
+    },
+    {
+        "id": "36643cf62163248b",
+        "type": "ha-api",
+        "z": "127e6c3c5def588c",
+        "name": "PegarEntidade",
+        "server": "6beb2ca33f3f50e9",
+        "version": 1,
+        "debugenabled": false,
+        "protocol": "websocket",
+        "method": "get",
+        "path": "",
+        "data": "msg.payload",
+        "dataType": "jsonata",
+        "responseType": "json",
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "results"
+            }
+        ],
+        "x": 240,
+        "y": 360,
+        "wires": [
+            [
+                "48975d64ae156350"
+            ]
+        ]
+    },
+    {
+        "id": "48975d64ae156350",
+        "type": "function",
+        "z": "127e6c3c5def588c",
+        "name": "Filtrar DeviceD",
+        "func": "const deviceIds = msg.devices.map(d => d.device_id);\nconst entities = msg.payload;\n\nmsg.payload = entities\n  .filter(e => deviceIds.includes(e.device_id))\n  .map(e => ({\n    id: e.entity_id,\n    name: e.name || e.original_name,\n    domain: e.platform\n  }));\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 360,
+        "wires": [
+            [
+                "585a75f414f8f168"
+            ]
+        ]
+    },
+    {
+        "id": "8f545e171e5f6a7e",
+        "type": "http in",
+        "z": "78cb223f5bddb963",
+        "name": "",
+        "url": "PegarValorDispositivo",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "e8c35b75a6e350b0"
+            ]
+        ]
+    },
+    {
+        "id": "96fa73b3f3e8ae28",
+        "type": "http response",
+        "z": "78cb223f5bddb963",
+        "name": "retorno",
+        "statusCode": "",
+        "headers": {},
+        "x": 920,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "e8c35b75a6e350b0",
+        "type": "function",
+        "z": "78cb223f5bddb963",
+        "name": "MontarPayloadHA",
+        "func": "if (!msg.req.query.device_id) {\n    msg.device_id = null\n}else{\n    msg.device_id = msg.req.query.device_id;\n}\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "ccf9f5dcb87e7f66"
+            ]
+        ]
+    },
+    {
+        "id": "ccf9f5dcb87e7f66",
+        "type": "switch",
+        "z": "78cb223f5bddb963",
+        "name": "ValidarDeveiceID",
+        "property": "device_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 180,
+        "wires": [
+            [
+                "1c207856685d864f"
+            ],
+            [
+                "23fa7e683a2277ef"
+            ]
+        ]
+    },
+    {
+        "id": "1c207856685d864f",
+        "type": "template",
+        "z": "78cb223f5bddb963",
+        "name": "Erro",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"ERRO:\":\"informar Dispositivo\"}",
+        "output": "json",
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "96fa73b3f3e8ae28"
+            ]
+        ]
+    },
+    {
+        "id": "23fa7e683a2277ef",
+        "type": "api-current-state",
+        "z": "78cb223f5bddb963",
+        "name": "",
+        "server": "6beb2ca33f3f50e9",
+        "version": 3,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "{{device_id}}",
+        "state_type": "str",
+        "blockInputOverrides": true,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "for": "0",
+        "forType": "num",
+        "forUnits": "minutes",
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 280,
+        "y": 300,
+        "wires": [
+            [
+                "91868f6148f015ae"
+            ]
+        ]
+    },
+    {
+        "id": "91868f6148f015ae",
+        "type": "function",
+        "z": "78cb223f5bddb963",
+        "name": "MontarPayload",
+        "func": "if (!msg.payload) {\n    msg.statusCode = 404;\n    msg.payload = {\n        error: \"Dispositivo nao encontrado\"\n    };\n    return msg;\n}\n\nmsg.payload = {\n    id: msg.device_id,\n    value: parseFloat(msg.payload.state),\n    unit: msg.payload.attributes.unit_of_measurement || \"\"\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 300,
+        "wires": [
+            [
+                "96fa73b3f3e8ae28"
+            ]
+        ]
+    }
+]
